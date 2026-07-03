@@ -1,0 +1,26 @@
+{
+  "collections": {
+    "bookings": {
+      "fields": {
+        "id": "string",
+        "status": "string",
+        "createdAt": "timestamp",
+        "totalAmount": "number",
+        "dateSlot": "string",
+        "timeSlot": "string"
+      }
+    },
+    "reviews": {
+      "fields": {
+        "id": "string",
+        "userName": "string",
+        "rating": "number",
+        "text": "string",
+        "serviceName": "string",
+        "source": "string",
+        "image": "string",
+        "date": "string"
+      }
+    }
+  }
+}

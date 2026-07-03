@@ -1,0 +1,6 @@
+{
+  "name": "FixerBaba",
+  "description": "Redesigned modern, lightning-fast on-demand home services platform with integrated AI assistant diagnostics, elegant bookings checkout, and real-time live service tracker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
