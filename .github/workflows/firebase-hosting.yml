@@ -31,9 +31,27 @@ jobs:
 
       - name: Prepare Firebase credentials
         run: |
-          mkdir -p ${{ runner.temp }}/firebase
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > ${{ runner.temp }}/firebase/key.json
-          export GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase/key.json
+          mkdir -p "${{ runner.temp }}/firebase"
+          KEYFILE="${{ runner.temp }}/firebase/key.json"
+          # try writing raw secret
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > "$KEYFILE"
+          # if it doesn't look like JSON with a private_key, try base64 decode
+          if ! grep -q '"private_key"' "$KEYFILE"; then
+            echo "Secret doesn't contain private_key, attempting base64 decode"
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 --decode > "$KEYFILE" 2>/dev/null || true
+          fi
+          # if still not valid, try interpreting escaped newlines
+          if ! grep -q '"private_key"' "$KEYFILE"; then
+            echo "Attempting to convert escaped newlines"
+            printf '%b' "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > "$KEYFILE" || true
+          fi
+          # final sanity check
+          if ! grep -q '"private_key"' "$KEYFILE"; then
+            echo "ERROR: service account key does not contain private_key" >&2
+            exit 1
+          fi
+          echo "Wrote service account key to $KEYFILE"
+          export GOOGLE_APPLICATION_CREDENTIALS="$KEYFILE"
 
       - name: Deploy to Firebase Hosting (production)
         env:
