@@ -93,234 +93,56 @@ export default function IndustrialHero({
     'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=600'  // phone service
   ];
 
-  // Exactly 25 unique images, mapping the actual uploaded user images in sequence so they load perfectly
-  const heroImages: HeroImageItem[] = [
-    {
-      id: '01',
-      url: '/photos/1.jpeg',
-      fallbackUrl: fallbackImages[0],
-      tag: '[LAB_MODEL_01]',
-      title: 'Micro-Soldering IC Repair',
-      specs: 'Calibration: 99.9% Perfect / Precision Micro',
-      category: 'Motherboard'
-    },
-    {
-      id: '02',
-      url: '/photos/2.png',
-      fallbackUrl: fallbackImages[1],
-      tag: '[LAB_MODEL_02]',
-      title: 'Shattered OLED Delamination',
-      specs: 'Thermal Separation: 80°C / Vacuum Suction',
-      category: 'iPhone Screen'
-    },
-    {
-      id: '03',
-      url: '/3.jpeg',
-      fallbackUrl: fallbackImages[2],
-      tag: '[LAB_MODEL_03]',
-      title: 'Class 100 Dust-Free Hood',
-      specs: 'HEPA filtration: 99.97% / Positive Pressure',
-      category: 'Lab Safety'
-    },
-    {
-      id: '04',
-      url: '/3B0174DD-817D-4946-A66F-B9FC21DAC30F.png',
-      fallbackUrl: fallbackImages[3],
-      tag: '[LAB_MODEL_04]',
-      title: 'BGA Reballing Stencil',
-      specs: 'Pitch: 0.35mm / SAC305 Alloy Spheroids',
-      category: 'Motherboard'
-    },
-    {
-      id: '05',
-      url: '/46965F49-3736-4542-B5E7-E1D33C448499.png',
-      fallbackUrl: fallbackImages[4],
-      tag: '[LAB_MODEL_05]',
-      title: 'Retina Display Lamination',
-      specs: 'Chamber Pressure: 0.45MPa / Pure Autoclave',
-      category: 'MacBook Screen'
-    },
-    {
-      id: '06',
-      url: '/5.jpeg',
-      fallbackUrl: fallbackImages[5],
-      tag: '[LAB_MODEL_06]',
-      title: 'TrueTone Serial Transporter',
-      specs: 'Serialization: Locked / Dynamic Calibration',
-      category: 'Diagnostics'
-    },
-    {
-      id: '07',
-      url: '/55253675-21CC-4C20-8A1B-8265E480237A.png',
-      fallbackUrl: fallbackImages[6],
-      tag: '[LAB_MODEL_07]',
-      title: 'Laser Back-Glass Separation',
-      specs: 'Focal laser: 1064nm / Computer Auto-Trace',
-      category: 'Back Glass'
-    },
-    {
-      id: '08',
-      url: '/6D5ED1FD-3D99-44B9-8349-A9BF3B444CD7.png',
-      fallbackUrl: fallbackImages[7],
-      tag: '[LAB_MODEL_08]',
-      title: 'Core Power Controller Swapping',
-      specs: 'Current draw test: 1.2A Peak / Stable Sleep',
-      category: 'Motherboard'
-    },
-    {
-      id: '09',
-      url: '/B6322703-6B3A-4C45-8598-D1D8B659C8DB.png',
-      fallbackUrl: fallbackImages[8],
-      tag: '[LAB_MODEL_09]',
-      title: 'Super-Retina OLED Matrix Bond',
-      specs: 'Polarizer alignment: <0.01mm / Flawless',
-      category: 'iPhone Screen'
-    },
-    {
-      id: '10',
-      url: '/EB5FA025-3FFA-42E9-AB09-136FE427D1FD.png',
-      fallbackUrl: fallbackImages[9],
-      tag: '[LAB_MODEL_10]',
-      title: 'FaceID TrueDepth Calibration',
-      specs: 'Laser dot projection test: 100% Verified',
-      category: 'Diagnostics'
-    },
-    {
-      id: '11',
-      url: '/IMG_1273.jpeg',
-      fallbackUrl: fallbackImages[10],
-      tag: '[LAB_MODEL_11]',
-      title: 'Electrostatic Discharge Bench',
-      specs: 'Ground resistance: <1 Ohm / Constant Monitoring',
-      category: 'Lab Safety'
-    },
-    {
-      id: '12',
-      url: '/e374078a-9b28-4708-9662-a1c513b3ab2b.jpeg',
-      fallbackUrl: fallbackImages[11],
-      tag: '[LAB_MODEL_12]',
-      title: 'MacBook Core Refurbishing Panel',
-      specs: 'Liquid Metal application / Cooling SLA',
-      category: 'MacBook Repair'
-    },
-    {
-      id: '13',
-      url: '/team.webp',
-      fallbackUrl: fallbackImages[12],
-      tag: '[LAB_MODEL_13]',
-      title: 'FixerBaba Certified Engineer',
-      specs: 'Background check: Passed / Expert Board Certified',
-      category: 'Lab Safety'
-    },
-    {
-      id: '14',
-      url: '/photos/10.jpeg',
-      fallbackUrl: fallbackImages[13],
-      tag: '[LAB_MODEL_14]',
-      title: 'Digital Microscope Inspection',
-      specs: 'Zoom ratio: 40x / Coaxial shadowless LED',
-      category: 'Diagnostics'
-    },
-    {
-      id: '15',
-      url: '/photos/11.jpeg',
-      fallbackUrl: fallbackImages[14],
-      tag: '[LAB_MODEL_15]',
-      title: 'Li-Cobalt Battery Core Test',
-      specs: 'Safety thermal scan: OK / Cycle reset',
-      category: 'Battery Swap'
-    },
-    {
-      id: '16',
-      url: '/photos/12.jpeg',
-      fallbackUrl: fallbackImages[15],
-      tag: '[LAB_MODEL_16]',
-      title: 'Flex Ribbon Pulse Welding',
-      specs: 'T-bar constant heating / Micro-alignment',
-      category: 'Flex Soldering'
-    },
-    {
-      id: '17',
-      url: '/photos/13.jpeg',
-      fallbackUrl: fallbackImages[16],
-      tag: '[LAB_MODEL_17]',
-      title: 'Graphene Thermal Sheet Fitting',
-      specs: 'Thermal dispersion: 400W/mK / Nano Grease',
-      category: 'Thermal Care'
-    },
-    {
-      id: '18',
-      url: '/photos/14.jpeg',
-      fallbackUrl: fallbackImages[17],
-      tag: '[LAB_MODEL_18]',
-      title: 'iPad Digitizer Alignment Jig',
-      specs: 'Multi-point Touch Coordinate Verification',
-      category: 'iPad Repair'
-    },
-    {
-      id: '19',
-      url: '/photos/15.jpeg',
-      fallbackUrl: fallbackImages[18],
-      tag: '[LAB_MODEL_19]',
-      title: 'Laser Panel Healing Chamber',
-      specs: 'OLED micro-shunt repair / Resonator focus',
-      category: 'iPhone Screen'
-    },
-    {
-      id: '20',
-      url: '/photos/16.jpeg',
-      fallbackUrl: fallbackImages[19],
-      tag: '[LAB_MODEL_20]',
-      title: 'Haptic Engine Magnetic Restrap',
-      specs: 'Resonance calibration: 235Hz / Stable Coil',
-      category: 'Haptic Repair'
-    },
-    {
-      id: '21',
-      url: '/photos/17.jpeg',
-      fallbackUrl: fallbackImages[0],
-      tag: '[LAB_MODEL_21]',
-      title: 'Waterproofing Seal Testing',
-      specs: 'IP68 Vacuum pressure check / Safe Seal',
-      category: 'Diagnostics'
-    },
-    {
-      id: '22',
-      url: '/photos/18.jpeg',
-      fallbackUrl: fallbackImages[1],
-      tag: '[LAB_MODEL_22]',
-      title: 'Anodic Al-Titanium Frame Press',
-      specs: 'Frame Tolerance: <0.02mm / Flawless Edge',
-      category: 'Frame Repair'
-    },
-    {
-      id: '23',
-      url: '/photos/19.jpeg',
-      fallbackUrl: fallbackImages[2],
-      tag: '[LAB_MODEL_23]',
-      title: 'LOCA Glass Autoclave De-Bubbler',
-      specs: 'Pressure: 0.6MPa / Cycle: 8 mins',
-      category: 'iPhone Screen'
-    },
-    {
-      id: '24',
-      url: '/photos/21.jpeg',
-      fallbackUrl: fallbackImages[3],
-      tag: '[LAB_MODEL_24]',
-      title: 'Smartwatch Glass Fuse Station',
-      specs: 'Force Touch Gasket / UV Cure chamber',
-      category: 'Smartwatch'
-    },
-    {
-      id: '25',
-      url: '/2BE84E7B-E075-41D4-923E-897BA047B363.png',
-      fallbackUrl: fallbackImages[4],
-      tag: '[LAB_MODEL_25]',
-      title: 'Physical Chassis Restoration',
-      specs: 'Wireless charging alignment / Flawless fit',
-      category: 'Frame Repair'
-    }
+  // Use images exclusively from public/photos (fallback to unsplash if any fail).
+  const photos = [
+    '/photos/1.jpeg','/photos/2.png','/photos/10.jpeg','/photos/11.jpeg','/photos/12.jpeg','/photos/13.jpeg','/photos/14.jpeg','/photos/15.jpeg','/photos/16.jpeg','/photos/17.jpeg','/photos/18.jpeg','/photos/19.jpeg','/photos/21.jpeg'
   ];
+
+  const mobileTitles = [
+    'Cracked Screen Replacement',
+    'Battery Replacement',
+    'Camera Module Repair',
+    'Charging Port Fix',
+    'Water Damage Restoration',
+    'Speaker & Mic Repair',
+    'Home Button / Sensor Repair',
+    'Back Glass Replacement',
+    'Motherboard Diagnostics',
+    'Firmware & Software Service',
+    'Display Calibration',
+    'Battery Health Optimization',
+    'Tablet Digitizer Alignment',
+    'Smartwatch Screen Repair',
+    'Haptic Motor Repair',
+    'Flex Cable Re-soldering',
+    'Thermal Shielding Fix',
+    'LOCA Glass Reflow',
+    'Frame & Chassis Repair',
+    'Data Recovery & Backup',
+    'Waterproof Seal Testing',
+    'Panel Adhesive Re-lamination',
+    'Precision Micro-Soldering',
+    'Diagnostic Microscope Inspection',
+    'Certified Technician Service'
+  ];
+
+  const mobileCategories = [
+    'Screen','Battery','Camera','Charging','Water Damage','Audio','Sensor','Back Glass','Motherboard','Software','Display','Battery','Tablet','Smartwatch','Haptic','Flex','Thermal','LOCA','Frame','Data','Diagnostics','Panel','Soldering','Inspection','Certified'
+  ];
+
+  // Build 25 hero items cycling through available photos
+  const heroImages: HeroImageItem[] = Array.from({ length: 25 }).map((_, i) => {
+    const idx = i % photos.length;
+    return {
+      id: String(i+1).padStart(2,'0'),
+      url: photos[idx],
+      fallbackUrl: fallbackImages[idx % fallbackImages.length],
+      tag: `[MOBILE_${String(i+1).padStart(2,'0')}]`,
+      title: mobileTitles[i % mobileTitles.length],
+      specs: `${mobileCategories[i % mobileCategories.length]} service · Expert technicians · 30-day warranty`,
+      category: mobileCategories[i % mobileCategories.length]
+    } as HeroImageItem;
+  });
 
   const handleScroll = (direction: 'left' | 'right') => {
     if (!scrollContainerRef.current) return;
