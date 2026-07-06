@@ -17,13 +17,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
-      - name: Install dependencies (skip optional native bindings)
+      - name: Install dependencies
         run: |
-          # skip installing optional native deps that can fail on CI
-          npm ci --no-optional || npm install --no-optional
-          # try to rebuild native modules if any exist
+          # try a clean install from lockfile, fall back to install if needed
+          npm ci || npm install
+          # rebuild native modules if any exist
           npm rebuild || true
 
       - name: Build
