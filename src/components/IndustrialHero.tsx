@@ -52,8 +52,9 @@ export default function IndustrialHero({
       if (!scrollContainerRef.current) return;
       const container = scrollContainerRef.current;
       const maxScrollLeft = container.scrollWidth - container.clientWidth;
-      
-      const scrollStep = container.clientWidth < 640 ? 205 : 265;
+
+      // Scroll by one visible page (container width) to show a single card on mobile
+      const scrollStep = container.clientWidth;
       let nextScrollLeft = container.scrollLeft + scrollStep;
       
       if (container.scrollLeft >= maxScrollLeft - 15) {
@@ -146,8 +147,8 @@ export default function IndustrialHero({
 
   const handleScroll = (direction: 'left' | 'right') => {
     if (!scrollContainerRef.current) return;
-    const scrollAmount = 380;
     const container = scrollContainerRef.current;
+    const scrollAmount = container.clientWidth; // move one page (one card on mobile)
     container.scrollTo({
       left: container.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount),
       behavior: 'smooth'
@@ -276,7 +277,7 @@ export default function IndustrialHero({
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => onSelectSearch(item.category)}
-                  className={`flex-shrink-0 w-[185px] sm:w-[225px] md:w-[245px] aspect-[9/14] sm:aspect-[10/16] rounded-[24px] overflow-hidden relative border-[3px] transition-all duration-300 hover:scale-[1.04] cursor-pointer snap-start group ${glowClass}`}
+                  className={`flex-shrink-0 min-w-[92%] sm:w-[225px] md:w-[245px] aspect-[9/14] sm:aspect-[10/16] rounded-[24px] overflow-hidden relative border-[3px] transition-all duration-300 hover:scale-[1.04] cursor-pointer snap-center group ${glowClass}`}
                 >
                   {/* Image Background */}
                   <img
