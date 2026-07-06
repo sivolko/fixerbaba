@@ -425,7 +425,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Clean and honest work. They cleaned my iPhone charging port for free when I thought it had to be replaced. Real integrity and friendly team of technicians!',
     serviceName: 'Core Diagnostic Clean-up',
     source: 'Google Review',
-    image: '/2.jpeg'
+    image: '/photos/2.png'
   },
   {
     id: '7',

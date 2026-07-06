@@ -23,6 +23,7 @@ import {
   Package,
   Heart,
   ChevronRight,
+  ChevronLeft,
   ShieldCheck,
   Award,
   Users,
@@ -58,6 +59,7 @@ import WhatsFormModal from './components/WhatsFormModal';
 import WriteReviewModal from './components/WriteReviewModal';
 import { BrandLogo } from './components/BrandLogo';
 import { LiveRepairBench } from './components/LiveRepairBench';
+import IndustrialHero from './components/IndustrialHero';
 
 // Firebase Helpers
 import {
@@ -67,6 +69,29 @@ import {
   saveBookingToFirestore,
   getBookingsFromFirestore
 } from './firebase';
+
+const bentoContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+    }
+  }
+};
+
+const bentoCardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 16
+    }
+  }
+};
 
 export default function App() {
   // Global states
@@ -83,6 +108,17 @@ export default function App() {
   
   // Reviews state (initially loaded from local file, synced with Firebase)
   const [reviews, setReviews] = useState<any[]>(STEPPING_TILES_REVIEWS);
+  
+  const reviewsContainerRef = React.useRef<HTMLDivElement>(null);
+  const scrollReviews = (direction: 'left' | 'right') => {
+    if (reviewsContainerRef.current) {
+      const scrollAmount = reviewsContainerRef.current.clientWidth;
+      reviewsContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
   
   // Cart management (local state)
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -319,19 +355,7 @@ export default function App() {
               </select>
             </div>
 
-            {/* Dynamic WhatsApp Desk Link */}
-            <a
-              href={AREA_WHATSAPP_LINKS[selectedArea]}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1.5 bg-[#25D366]/10 text-[#25D366] dark:bg-[#25D366]/20 hover:bg-[#25D366]/20 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all border border-[#25D366]/25 hover:scale-[1.02] active:scale-[0.98]"
-              title={`Chat with FixerBaba ${selectedArea} Desk`}
-            >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.977 14.053.951 11.43.951c-5.44 0-9.866 4.369-9.87 9.802-.001 1.716.463 3.39 1.34 4.877l-.994 3.634 3.751-.984zm11.083-7.5c-.302-.15-1.786-.881-2.053-.978-.266-.097-.461-.146-.655.15-.194.297-.749.978-.919 1.173-.17.195-.34.219-.642.069-.302-.15-1.272-.469-2.423-1.496-.895-.798-1.5-1.783-1.676-2.082-.175-.3-.019-.462.131-.611.135-.134.302-.35.454-.525.151-.175.202-.299.302-.5.101-.2.051-.375-.025-.526-.076-.15-.655-1.579-.897-2.161-.236-.569-.475-.492-.655-.501-.17-.008-.364-.01-.559-.01-.194 0-.51.073-.777.364-.266.292-1.02 1.025-1.02 2.501 0 1.475 1.07 2.9 1.215 3.1.146.199 2.105 3.214 5.099 4.507.712.308 1.27.493 1.704.631.715.227 1.365.195 1.88.118.574-.085 1.786-.73 2.039-1.436.252-.706.252-1.312.176-1.436-.076-.124-.267-.197-.569-.347z"/>
-              </svg>
-              <span>WhatsApp {selectedArea} Desk</span>
-            </a>
+
           </div>
 
           {/* Quick Header Options */}
@@ -414,66 +438,41 @@ export default function App() {
 
       <main className="flex-1 pb-16">
         
+        {/* Dribbble-inspired Premium Industrial Hero Section */}
+        <IndustrialHero
+          selectedArea={selectedArea}
+          onAreaChange={setSelectedArea}
+          onBookClick={() => setIsWhatsFormOpen(true)}
+          onExploreClick={() => {
+            const el = document.getElementById('services-grid');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
+          onSelectSearch={(query) => {
+            setSearchQuery(query);
+            const el = document.getElementById('services-grid');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+        
         {/* 2. Bento Grid Dashboard spotlight area */}
         <section className="relative px-4 py-8 md:py-12 overflow-hidden">
           <div className="max-w-7xl mx-auto">
             
             {/* Bento Layout Pattern Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+            <motion.div 
+              variants={bentoContainerVariants}
+              initial="hidden"
+              animate="visible"
+              className="grid grid-cols-1 md:grid-cols-4 gap-5"
+            >
               
-              {/* Box 1 (Hero Bento Large, spans 2 cols, 2 rows) */}
-              <div className="md:col-span-2 md:row-span-2 bg-bento-card rounded-[32px] p-8 md:p-10 flex flex-col justify-between shadow-sm border border-bento-border overflow-hidden relative group hover:shadow-md transition-all duration-300">
-                <div className="z-10 flex flex-col h-full justify-between">
-                  <div className="space-y-4">
-                    <span className="text-amber-600 dark:text-amber-400 font-extrabold text-[10px] tracking-wider uppercase bg-amber-550/15 px-3 py-1 rounded-full inline-block">
-                      ✨ Your phone is in safe hands
-                    </span>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-[1.1] tracking-tight text-bento-text font-sans">
-                      Glass-Only Repair <br />
-                      <span className="text-bento-blue">Don't Change Whole Display.</span>
-                    </h1>
-                    <p className="text-bento-sub text-xs sm:text-sm font-semibold leading-relaxed max-w-md">
-                      Save 50-70% on screen repairs with our advanced Liquid-Optically Clear Adhesive (LOCA) glass fusion process. Preserves your original OLED matrix with flawless touch response.
-                    </p>
-                    
-                    {/* Brand claims list from images */}
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 pt-4 border-t border-bento-border/70">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
-                        <span className="text-[11px] font-bold text-bento-text">Crystal Clear Clarity</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
-                        <span className="text-[11px] font-bold text-bento-text">Save 50-70% Cost</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
-                        <span className="text-[11px] font-bold text-bento-text">No Display Change</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
-                        <span className="text-[11px] font-bold text-bento-text">Done in 30 Minutes</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-8">
-                    <button
-                      id="hero-book-diagnostic-btn"
-                      onClick={() => setIsWhatsFormOpen(true)}
-                      className="bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white px-6 py-3 rounded-full text-xs font-bold transition-all inline-flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-97 cursor-pointer shadow-sm hover:shadow-md h-11 w-full sm:w-auto"
-                    >
-                      <Sparkles className="w-3.5 h-3.5 fill-current animate-pulse text-amber-300" />
-                      <span>Book Diagnostic Visit (₹0)</span>
-                    </button>
-                  </div>
-                </div>
-                {/* Abstract background blur mimic */}
-                <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-bento-blue/10 rounded-full filter blur-3xl opacity-60 pointer-events-none group-hover:scale-110 transition-transform duration-700"></div>
-              </div>
+
 
               {/* Box 2 (Location & Area - Bento Medium) */}
-              <div className="md:col-span-2 bg-bento-card rounded-[32px] p-6 md:p-8 shadow-sm border border-bento-border flex flex-col sm:flex-row sm:items-center justify-between gap-5 transition-colors">
+              <motion.div 
+                variants={bentoCardVariants}
+                className="md:col-span-2 bg-bento-card rounded-[32px] p-6 md:p-8 shadow-sm border border-bento-border flex flex-col sm:flex-row sm:items-center justify-between gap-5 transition-colors"
+              >
                 <div className="space-y-3">
                   <div>
                     <h3 className="text-xs text-bento-sub font-bold uppercase tracking-wider">Service Location</h3>
@@ -509,10 +508,13 @@ export default function App() {
                   </select>
                   <ChevronDown className="w-3.5 h-3.5 text-bento-sub absolute right-3.5 top-3.5 pointer-events-none" />
                 </div>
-              </div>
+              </motion.div>
 
               {/* Box 3 (Smart Input Prompt Search - Bento Medium) */}
-              <div className="md:col-span-2 bg-bento-card rounded-[32px] p-6 md:p-8 shadow-sm border border-bento-border flex flex-col justify-center space-y-3 transition-colors">
+              <motion.div 
+                variants={bentoCardVariants}
+                className="md:col-span-2 bg-bento-card rounded-[32px] p-6 md:p-8 shadow-sm border border-bento-border flex flex-col justify-center space-y-3 transition-colors"
+              >
                 <div>
                   <h3 className="text-xs text-bento-sub font-bold uppercase tracking-wider">What device broke?</h3>
                   <p className="text-[10px] text-bento-sub mt-0.5">Type or tap trending shortcuts to quick find.</p>
@@ -551,10 +553,11 @@ export default function App() {
                     </button>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Box 4 (Rapid Service shortcut 1 - Bento Small) */}
-              <button
+              <motion.button
+                variants={bentoCardVariants}
                 onClick={() => {
                   setSelectedCategory('iphone');
                   setSearchQuery('');
@@ -568,10 +571,11 @@ export default function App() {
                 </div>
                 <span className="font-bold text-sm text-bento-text">iPhone Repair</span>
                 <span className="text-[10px] text-bento-sub mt-0.5">OLED screen &amp; battery solutions</span>
-              </button>
+              </motion.button>
 
               {/* Box 5 (Rapid Service shortcut 2 - Bento Small) */}
-              <button
+              <motion.button
+                variants={bentoCardVariants}
                 onClick={() => {
                   setSelectedCategory('macbook');
                   setSearchQuery('');
@@ -585,56 +589,63 @@ export default function App() {
                 </div>
                 <span className="font-bold text-sm text-bento-text">MacBook Repair</span>
                 <span className="text-[10px] text-bento-sub mt-0.5">Retina screens &amp; battery service</span>
-              </button>
+              </motion.button>
 
-              {/* Box 6 (Safety Warranty - Bento Vertical, tall layout span 2 rows) */}
-              <div className="bg-neutral-900 dark:bg-[#161617] border border-neutral-800 dark:border-bento-border text-white rounded-[32px] p-8 flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-300 md:row-span-2">
-                <div className="absolute top-6 right-6 opacity-10">
-                  <Wrench className="w-24 h-24 stroke-[1.5]" />
+              {/* Box 6 (Safety Warranty - Bento Vertical, tall layout span 2 rows & 2 columns) */}
+              <motion.div 
+                variants={bentoCardVariants}
+                className="bg-neutral-900 dark:bg-[#161617] border border-neutral-800 dark:border-bento-border text-white rounded-[32px] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-300 md:col-span-2 md:row-span-2"
+              >
+                <div className="absolute top-10 right-10 opacity-10">
+                  <Wrench className="w-40 h-40 stroke-[1.5]" />
                 </div>
                 <div className="z-10">
-                  <div className="w-11 h-11 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
-                    <ShieldCheck className="w-5 h-5 text-bento-blue" />
+                  <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-8">
+                    <ShieldCheck className="w-7 h-7 text-bento-blue" />
                   </div>
-                  <h4 className="text-xl font-bold tracking-tight text-white leading-tight">Baba Safety Standard</h4>
-                  <p className="text-xs text-neutral-400 mt-3 leading-relaxed">
+                  <h4 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-tight">Baba Safety Standard</h4>
+                  <p className="text-sm text-neutral-400 mt-4 leading-relaxed max-w-md">
                     Verified hardware engineers, ESD-safe lab benches, and an untampered 30-day post-service warranty.
                   </p>
                 </div>
-                <div className="mt-8 z-10 flex items-center justify-between text-[11px] text-[#86868b] border-t border-neutral-800 pt-4">
+                <div className="mt-12 z-10 flex items-center justify-between text-xs text-[#86868b] border-t border-neutral-800 pt-5">
                   <span>Assured visit SLA</span>
-                  <span className="font-bold text-white">45-Min Guarantee</span>
+                  <span className="font-extrabold text-white text-sm">45-Min Guarantee</span>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Box 7 (Loyalty Club Member - Bento Horizontal Wide, col-span-2) */}
-              <div className="md:col-span-2 bg-gradient-to-br from-[#7c3aed] to-[#4f46e5] rounded-[32px] p-8 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 overflow-hidden relative group shadow-sm hover:shadow-md transition-all duration-300">
+              {/* Box 7 (Loyalty Club Member - Bento Horizontal Narrow, col-span-1) */}
+              <motion.div 
+                variants={bentoCardVariants}
+                className="md:col-span-1 bg-gradient-to-br from-[#7c3aed] to-[#4f46e5] rounded-[32px] p-6 text-white flex flex-col justify-between overflow-hidden relative group shadow-sm hover:shadow-md transition-all duration-300"
+              >
                 <div className="z-10">
                   <span className="bg-white/20 text-[9px] uppercase font-black tracking-widest px-2.5 py-1 rounded-md">
                     Exclusive Benefit
                   </span>
-                  <h3 className="text-2xl font-extrabold mt-3 tracking-tight">Fixer Plus VIP</h3>
-                  <p className="opacity-80 text-xs mt-1.5 max-w-sm leading-relaxed">
-                    Join outstanding gadget owners. Unlock <span className="font-bold text-yellow-300">priority VIP scheduling and dedicated lab engineer</span> assignments.
+                  <h3 className="text-lg font-extrabold mt-3 tracking-tight">Express Repair Club</h3>
+                  <p className="opacity-85 text-[10px] mt-2 leading-relaxed">
+                    Join owners. Unlock <span className="font-bold text-yellow-300">priority express scheduling &amp; lead expert</span> assignments.
                   </p>
                 </div>
-                <div className="shrink-0 z-10">
+                <div className="shrink-0 z-10 mt-5">
                   <button
                     onClick={() => setIsPlusMember(!isPlusMember)}
-                    className={`px-6 py-3 rounded-full font-bold text-xs tracking-tight shadow-md hover:scale-[1.03] active:scale-[0.97] transition-all cursor-pointer ${
+                    className={`w-full py-2.5 px-4 rounded-full font-bold text-[10px] tracking-tight shadow-md hover:scale-[1.03] active:scale-[0.97] transition-all cursor-pointer ${
                       isPlusMember
                         ? 'bg-emerald-500 text-white'
                         : 'bg-white text-indigo-700 hover:bg-neutral-50 dark:bg-neutral-900 dark:text-indigo-400 dark:hover:bg-neutral-800'
                     }`}
                   >
-                    {isPlusMember ? 'Plus VIP Active ✓' : 'Join Plus VIP'}
+                    {isPlusMember ? 'Express Club Active ✓' : 'Join Express Club'}
                   </button>
                 </div>
                 <div className="absolute right-0 top-0 w-36 h-36 bg-white/5 rounded-full filter blur-2xl"></div>
-              </div>
+              </motion.div>
 
               {/* Box 8 (Instant Diagnostician Live Agent - Bento Small) */}
-              <button
+              <motion.button
+                variants={bentoCardVariants}
                 onClick={() => setIsAiOpen(true)}
                 className="bg-bento-card hover:bg-bento-bg/80 rounded-[32px] p-6 flex items-center gap-4 transition-all text-left cursor-pointer group border border-bento-border shadow-xs"
               >
@@ -645,20 +656,28 @@ export default function App() {
                   <h4 className="text-xs font-black uppercase text-bento-text">Live Support</h4>
                   <p className="text-[10px] text-bento-sub mt-0.5 leading-tight">Expert AI helps diagnose instantly &lt; 2m</p>
                 </div>
-              </button>
+              </motion.button>
 
-              {/* Box 9 (Verified Ratings statistics card - Bento Small) */}
-              <div className="bg-bento-card rounded-[32px] p-6 flex flex-col justify-center border border-bento-border shadow-sm transition-colors">
-                <span className="text-3xl font-extrabold tracking-tight text-bento-text">4.8/5</span>
-                <div className="flex text-yellow-400 mt-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                  ))}
+              {/* Box 9 (Verified Ratings statistics card - Bento Wide, col-span-4) */}
+              <motion.div 
+                variants={bentoCardVariants}
+                className="md:col-span-4 bg-bento-card rounded-[32px] p-6 px-8 flex flex-col sm:flex-row items-center justify-between gap-4 border border-bento-border shadow-sm transition-colors"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="text-4xl font-black tracking-tight text-bento-text">4.8/5</span>
+                  <div>
+                    <div className="flex text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-bento-sub text-[10px] font-bold tracking-wide uppercase mt-1">Overall Customer Rating</p>
+                  </div>
                 </div>
-                <span className="text-bento-sub text-[10px] font-bold tracking-wide uppercase mt-2">2.4M Verified Ratings</span>
-              </div>
+                <span className="text-bento-sub text-xs font-bold tracking-wider uppercase">2.4M Verified Ratings Across India</span>
+              </motion.div>
 
-            </div>
+            </motion.div>
 
           </div>
         </section>
@@ -970,16 +989,14 @@ export default function App() {
                           >
                             Details
                           </button>
-                          <button
-                            onClick={() => handleAddToCart(service)}
-                            className={`px-4 py-1.5 text-[10px] font-bold rounded-full transition-all cursor-pointer ${
-                              isInCart
-                                ? 'bg-bento-text text-bento-bg shadow-inner'
-                                : 'bg-bento-blue hover:bg-bento-blue-hover text-white shadow-sm'
-                            }`}
+                          <a
+                            href={`${AREA_WHATSAPP_LINKS[selectedArea] || 'https://wa.me/+919535377862'}?text=${encodeURIComponent(`Hi FixerBaba, I would like to get a quote/book a repair for ${service.name} in ${selectedArea}.`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-1.5 text-[10px] font-bold rounded-full transition-all bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm flex items-center justify-center cursor-pointer"
                           >
-                            {isInCart ? 'Selected ✓' : 'Quote +'}
-                          </button>
+                            Contact
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -1137,9 +1154,28 @@ export default function App() {
                 </svg>
                 <span>Google Verified Reviews</span>
               </span>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-bento-text tracking-tight">
-                Loved by 50,000+ Bengalureans
-              </h2>
+              <div className="flex items-center justify-between gap-4">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-bento-text tracking-tight">
+                  Loved by 50,000+ Bengalureans
+                </h2>
+                {/* Arrow navigation buttons */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    onClick={() => scrollReviews('left')}
+                    className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-bento-border bg-bento-card hover:bg-neutral-200/40 dark:hover:bg-neutral-850/45 flex items-center justify-center text-bento-text transition-colors cursor-pointer"
+                    aria-label="Previous reviews"
+                  >
+                    <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+                  </button>
+                  <button
+                    onClick={() => scrollReviews('right')}
+                    className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-bento-border bg-bento-card hover:bg-neutral-200/40 dark:hover:bg-neutral-850/45 flex items-center justify-center text-bento-text transition-colors cursor-pointer"
+                    aria-label="Next reviews"
+                  >
+                    <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+                  </button>
+                </div>
+              </div>
               <p className="text-xs text-bento-sub font-semibold max-w-xl">
                 Read authentic Google reviews from real device owners across Koramangala, Marathahalli, and HBR Layout.
               </p>
@@ -1181,11 +1217,14 @@ export default function App() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div 
+            ref={reviewsContainerRef}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4"
+          >
             {reviews.map((rev) => (
               <div
                 key={rev.id}
-                className="p-8 bg-bento-card border border-bento-border rounded-[32px] shadow-xs hover:shadow-md transition-all duration-350 flex flex-col justify-between space-y-5 text-left"
+                className="snap-start shrink-0 w-full sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] p-8 bg-bento-card border border-bento-border rounded-[32px] shadow-xs hover:shadow-md transition-all duration-350 flex flex-col justify-between space-y-5 text-left"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -1591,6 +1630,7 @@ export default function App() {
         onClose={() => setSelectedDetailService(null)}
         onAddToCart={handleAddToCart}
         isInCart={selectedDetailService ? !!cart.find((item) => item.service.id === selectedDetailService.id) : false}
+        whatsappUrl={selectedDetailService ? `${AREA_WHATSAPP_LINKS[selectedArea] || 'https://wa.me/+919535377862'}?text=${encodeURIComponent(`Hi FixerBaba, I would like to get a quote/book a repair for ${selectedDetailService.name} in ${selectedArea}.`)}` : undefined}
       />
 
       <CheckoutModal

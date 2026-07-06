@@ -8,6 +8,7 @@ interface ServiceDetailDrawerProps {
   onClose: () => void;
   onAddToCart: (service: ServiceItem) => void;
   isInCart: boolean;
+  whatsappUrl?: string;
 }
 
 export default function ServiceDetailDrawer({
@@ -15,7 +16,8 @@ export default function ServiceDetailDrawer({
   isOpen,
   onClose,
   onAddToCart,
-  isInCart
+  isInCart,
+  whatsappUrl
 }: ServiceDetailDrawerProps) {
   if (!service) return null;
 
@@ -159,19 +161,15 @@ export default function ServiceDetailDrawer({
 
             {/* Bottom Sticky Action Bar */}
             <div className="sticky bottom-0 p-4 border-t border-neutral-200 bg-white/90 backdrop-blur-md flex items-center gap-3">
-              <button
-                onClick={() => {
-                  onAddToCart(service);
-                  onClose();
-                }}
-                className={`w-full py-3.5 px-4 rounded-xl font-bold text-sm tracking-wide transition-all duration-300 ${
-                  isInCart
-                    ? 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
-                    : 'bg-neutral-950 text-white hover:bg-neutral-900 active:scale-95 shadow-md hover:shadow-lg'
-                }`}
+              <a
+                href={whatsappUrl || 'https://wa.me/+919535377862'}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onClose}
+                className="w-full py-3.5 px-4 rounded-xl font-bold text-sm tracking-wide text-center bg-emerald-600 hover:bg-emerald-700 text-white active:scale-95 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
               >
-                {isInCart ? 'Modify Selection' : 'Add to Quote Request'}
-              </button>
+                Contact on WhatsApp
+              </a>
             </div>
           </motion.div>
         </>

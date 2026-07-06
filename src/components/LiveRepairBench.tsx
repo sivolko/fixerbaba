@@ -114,7 +114,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-desk-kora',
-    image: '/2.jpeg',
+    image: '/photos/2.png',
     title: 'Koramangala Alpha Core Workstation',
     category: 'workshop',
     categoryLabel: 'Diagnostic Lab',

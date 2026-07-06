@@ -1,26 +1,44 @@
 {
-  "collections": {
-    "bookings": {
-      "fields": {
-        "id": "string",
-        "status": "string",
-        "createdAt": "timestamp",
-        "totalAmount": "number",
-        "dateSlot": "string",
-        "timeSlot": "string"
-      }
+  "entities": {
+    "Booking": {
+      "title": "Booking",
+      "description": "A customer booking record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "dateSlot": { "type": "string" },
+        "timeSlot": { "type": "string" }
+      },
+      "required": ["id", "status", "createdAt", "totalAmount"]
     },
-    "reviews": {
-      "fields": {
-        "id": "string",
-        "userName": "string",
-        "rating": "number",
-        "text": "string",
-        "serviceName": "string",
-        "source": "string",
-        "image": "string",
-        "date": "string"
-      }
+    "Review": {
+      "title": "Review",
+      "description": "A customer review record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "number" },
+        "text": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "source": { "type": "string" },
+        "image": { "type": "string" },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "userName", "rating", "text"]
+    }
+  },
+  "firestore": {
+    "bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Customer bookings collection"
+    },
+    "reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Customer reviews collection"
     }
   }
 }

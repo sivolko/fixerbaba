@@ -11,6 +11,9 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// Only serve static images from the root if they match image formats, so we do not interfere with Vite's dev server of index.html or scripts
+app.use(/\.(jpe?g|png|webp|gif|svg|jpeg)$/i, express.static(process.cwd()));
+
 // Initialize Gemini SDK lazily to protect against missing keys on standard startups
 let aiClient: GoogleGenAI | null = null;
 function getGeminiClient(): GoogleGenAI | null {
