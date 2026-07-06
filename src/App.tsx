@@ -768,6 +768,8 @@ export default function App() {
                         <img
                           src={activeBookings[0].partner.photo}
                           alt={activeBookings[0].partner.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-12 h-12 rounded-full object-cover border border-neutral-800 shrink-0"
                           referrerPolicy="no-referrer"
                         />
@@ -914,6 +916,8 @@ export default function App() {
                       <img
                         src={service.image}
                         alt={service.name}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-[1.04] transition-all duration-500"
                         referrerPolicy="no-referrer"
                       />
@@ -1250,6 +1254,8 @@ export default function App() {
                       <img
                         src={rev.image}
                         alt="Verified customer review proof"
+                        loading="lazy"
+                        decoding="async"
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       />
@@ -1295,6 +1301,8 @@ export default function App() {
                   id="about-team-image"
                   src={teamImgSrc}
                   alt="FixerBaba Professional Team"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                   referrerPolicy="no-referrer"
                   onError={() => {

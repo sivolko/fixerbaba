@@ -253,7 +253,7 @@ export default function IndustrialHero({
         >
           <div 
             ref={scrollContainerRef}
-            className="w-full overflow-x-auto flex gap-5 py-4 px-1 scroll-smooth snap-x snap-mandatory scrollbar-none"
+            className="w-full overflow-x-auto flex gap-5 py-4 px-1 scroll-smooth snap-x snap-mandatory scrollbar-none md:h-[420px]"
           >
             {heroImages.map((item, idx) => {
               const isFailed = failedImages[item.id];
@@ -277,13 +277,15 @@ export default function IndustrialHero({
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={() => onSelectSearch(item.category)}
-                  className={`flex-shrink-0 min-w-[92%] sm:w-[225px] md:w-[245px] aspect-[9/14] sm:aspect-[10/16] rounded-[24px] overflow-hidden relative border-[3px] transition-all duration-300 hover:scale-[1.04] cursor-pointer snap-center group ${glowClass}`}
+                  className={`flex-shrink-0 min-w-[92%] sm:w-[225px] md:w-[245px] aspect-[9/14] sm:aspect-[10/16] rounded-[24px] overflow-hidden relative border-[3px] transition-all duration-300 hover:scale-[1.04] cursor-pointer snap-center group ${glowClass} md:max-h-[420px]`}
                 >
                   {/* Image Background */}
                   <img
                     src={imgSrc}
                     alt={item.title}
                     referrerPolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={() => {
                       setFailedImages(prev => ({ ...prev, [item.id]: true }));

@@ -33,6 +33,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           on any dark or OLED black surfaces!
       */}
       <img
+        decoding="async"
         src="/46965F49-3736-4542-B5E7-E1D33C448499.png"
         alt="FixerBaba"
         referrerPolicy="no-referrer"

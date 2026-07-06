@@ -221,6 +221,8 @@ export const LiveRepairBench: React.FC = () => {
                 src={job.image}
                 alt={job.title}
                 referrerPolicy="no-referrer"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
@@ -280,6 +282,8 @@ export const LiveRepairBench: React.FC = () => {
                 src={selectedJob.image}
                 alt={selectedJob.title}
                 referrerPolicy="no-referrer"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-4 left-4 flex flex-col gap-1.5">
