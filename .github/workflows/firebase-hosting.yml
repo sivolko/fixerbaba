@@ -19,8 +19,12 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies (skip optional native bindings)
+        run: |
+          # skip installing optional native deps that can fail on CI
+          npm ci --no-optional || npm install --no-optional
+          # try to rebuild native modules if any exist
+          npm rebuild || true
 
       - name: Build
         run: npm run build
