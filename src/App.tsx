@@ -130,16 +130,7 @@ export default function App() {
   
   // Dynamic Team Image loader with multiple fallback paths to automatically resolve uploaded images
   const TEAM_IMAGE_SOURCES = [
-    '/e374078a-9b28-4708-9662-a1c513b3ab2b.jpeg',
-    '/team.webp',
-    '/assets/team.webp',
-    '/assets/team.jpg',
-    '/assets/team.png',
-    '/team.jpg',
-    '/team.png',
-    '/assets/team.jpeg',
-    '/team.jpeg',
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1200'
+    '/photos/1.jpeg','/photos/2.png','/photos/10.jpeg','/photos/11.jpeg','/photos/12.jpeg','/photos/13.jpeg','/photos/14.jpeg','/photos/15.jpeg','/photos/16.jpeg','https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1200'
   ];
   const [teamImgSrc, setTeamImgSrc] = useState<string>(TEAM_IMAGE_SOURCES[0]);
   const [teamImgIndex, setTeamImgIndex] = useState<number>(0);
@@ -1275,11 +1266,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* 7.2 Live Repair Bench Proof of Work */}
-        <section id="live-repair-bench" className="max-w-7xl mx-auto px-4 sm:px-8 mt-24">
-          <LiveRepairBench />
-        </section>
-
         {/* 7.5. About Our Team section */}
         <section id="about-section" className="max-w-7xl mx-auto px-4 sm:px-8 mt-24">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -1316,13 +1302,13 @@ export default function App() {
                 {/* Dark Gradient Overlay modeled on the user's uploaded layout */}
                 <div id="about-image-overlay" className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
                 
-                {/* Styled Meet Our Team Text Overlay matching the user's attachment */}
+                {/* Styled About Text Overlay (updated to show live work & repair) */}
                 <div id="about-text-overlay" className="absolute bottom-8 left-0 right-0 text-center select-none space-y-1 px-6">
                   <h3 id="about-overlay-title" className="text-2xl md:text-4xl font-extrabold tracking-widest text-white font-display drop-shadow-md">
-                    MEET OUR TEAM
+                    OUR LIVE WORK &amp; REPAIR
                   </h3>
                   <p id="about-overlay-subtitle" className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-neutral-300 uppercase drop-shadow">
-                    THE HEART OF BUSINESS
+                    REAL BENCH SNAPHOTS
                   </p>
                 </div>
 
@@ -1518,6 +1504,11 @@ export default function App() {
 
             </div>
           </div>
+        </section>
+
+        {/* 7.2 Live Repair Bench Proof of Work (moved below about section as requested) */}
+        <section id="live-repair-bench" className="max-w-7xl mx-auto px-4 sm:px-8 mt-12">
+          <LiveRepairBench />
         </section>
 
         {/* 8. Frequently Asked Questions Minimal accordion */}

@@ -33,7 +33,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           on any dark or OLED black surfaces!
       */}
       <img
-        src="/IMG_1273.jpeg"
+        src="/46965F49-3736-4542-B5E7-E1D33C448499.png"
         alt="FixerBaba"
         referrerPolicy="no-referrer"
         className={`${heights} w-auto object-contain transition-all duration-300 invert mix-blend-multiply dark:invert-0 dark:mix-blend-screen`}

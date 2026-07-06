@@ -375,7 +375,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Got my iPhone display and battery replaced. Extremely fast service, they did it right in front of me at my office desk. Very polite behavior and reasonable price compared to the showroom.',
     serviceName: 'iPhone Display & Battery Swap',
     source: 'Google Review',
-    image: '/B6322703-6B3A-4C45-8598-D1D8B659C8DB.png'
+    image: '/photos/10.jpeg'
   },
   {
     id: '2',
@@ -385,7 +385,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Excellent service for MacBook Air M1 motherboard repair. They diagnosed the water damage issue quickly and resolved it within a day. True professional board-level engineers!',
     serviceName: 'MacBook Motherboard Repair',
     source: 'Google Review',
-    image: '/46965F49-3736-4542-B5E7-E1D33C448499.png'
+    image: '/photos/11.jpeg'
   },
   {
     id: '3',
@@ -395,7 +395,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Highly recommended! Replaced my iPhone 13 Pro Max back glass. Their computer-guided laser separation rig in Koramangala is amazing. Pristine finish like original. Value for money.',
     serviceName: 'iPhone Laser Back Glass Replacement',
     source: 'Google Review',
-    image: '/55253675-21CC-4C20-8A1B-8265E480237A.png'
+    image: '/photos/12.jpeg'
   },
   {
     id: '4',
@@ -405,7 +405,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Excellent experience. My iPhone Face ID and ear speaker issue was resolved within 45 mins. Price is quite reasonable. The best part is transparent doorstep service.',
     serviceName: 'FaceID Sensor Calibration',
     source: 'Google Review',
-    image: '/EB5FA025-3FFA-42E9-AB09-136FE427D1FD.png'
+    image: '/photos/13.jpeg'
   },
   {
     id: '5',
@@ -415,7 +415,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Shattered screen of my MacBook Pro M1 was replaced. Perfect calibration and original colors. Completely satisfied with the instant dispatch to my HBR Layout home.',
     serviceName: 'MacBook Screen Replacement',
     source: 'Google Review',
-    image: '/6D5ED1FD-3D99-44B9-8349-A9BF3B444CD7.png'
+    image: '/photos/14.jpeg'
   },
   {
     id: '6',
@@ -435,7 +435,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Brought my swollen iPad battery for replacement. Quick and efficient. Done within 2 hours at their Marathahalli work desk. Very friendly staff and genuine spec parts.',
     serviceName: 'iPad High-Capacity Battery Swap',
     source: 'Google Review',
-    image: '/5.jpeg'
+    image: '/photos/15.jpeg'
   },
   {
     id: '8',
@@ -445,7 +445,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'I was facing the permanent green line display issue on my iPhone 13 Pro. The technicians at the HBR Layout desk repaired it using micro-soldering wire matrix bypass. Works like charm, highly recommend!',
     serviceName: 'iPhone Display Screen Bypass',
     source: 'Google Review',
-    image: '/3B0174DD-817D-4946-A66F-B9FC21DAC30F.png'
+    image: '/photos/16.jpeg'
   },
   {
     id: '9',
@@ -455,7 +455,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Highly accurate diagnostic software check. They hooked up my heating MacBook to their diagnostics program and pinpointed a thermal paste dry-out. Professional team!',
     serviceName: 'Ultimate Full Device Diagnosis',
     source: 'Google Review',
-    image: '/e374078a-9b28-4708-9662-a1c513b3ab2b.jpeg'
+    image: '/photos/17.jpeg'
   },
   {
     id: '10',
@@ -465,7 +465,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Very clean replacement of my cracked iPad screen. The calibration is extremely precise and works seamlessly with Apple Pencil. Doorstep toolkit they bring is highly advanced!',
     serviceName: 'iPad Digitizer Shock Injury Fix',
     source: 'Google Review',
-    image: '/2BE84E7B-E075-41D4-923E-897BA047B363.png'
+    image: '/photos/18.jpeg'
   },
   {
     id: '11',
@@ -475,7 +475,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Absolutely amazing! The technician arrived with a complete electrostatic discharge kit, professional screwdrivers, and did the repair right before my eyes. Fully trustworthy process.',
     serviceName: 'Doorstep Gadget Repair Kit',
     source: 'Google Review',
-    image: '/IMG_1273.jpeg'
+    image: '/photos/1.jpeg'
   },
   {
     id: '12',
@@ -485,7 +485,7 @@ export const STEPPING_TILES_REVIEWS = [
     text: 'Got my iPhone screen glass replaced and battery health restored back to 100%. Extremely satisfied with the behavior of the technicians. Fully professional team in Bengaluru!',
     serviceName: 'iPhone Battery & Screen Refurbish',
     source: 'Google Review',
-    image: '/3.jpeg'
+    image: '/photos/19.jpeg'
   }
 ];
 

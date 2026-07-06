@@ -15,10 +15,14 @@ interface RepairJob {
   notes: string;
 }
 
+const photos = [
+  '/photos/1.jpeg','/photos/2.png','/photos/10.jpeg','/photos/11.jpeg','/photos/12.jpeg','/photos/13.jpeg','/photos/14.jpeg','/photos/15.jpeg','/photos/16.jpeg','/photos/17.jpeg','/photos/18.jpeg','/photos/19.jpeg','/photos/21.jpeg'
+];
+
 const REPAIR_GALLERY_DATA: RepairJob[] = [
   {
     id: 'job-team-group',
-    image: '/e374078a-9b28-4708-9662-a1c513b3ab2b.jpeg',
+    image: photos[0],
     title: 'FixerBaba Certified Engineering Squad',
     category: 'team',
     categoryLabel: 'Engineering Team',
@@ -30,7 +34,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-laser-1',
-    image: '/55253675-21CC-4C20-8A1B-8265E480237A.png',
+    image: photos[1],
     title: 'iPhone 14 Pro Max Laser Separation',
     category: 'iphone',
     categoryLabel: 'Laser Separation',
@@ -42,7 +46,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-mb-1',
-    image: '/46965F49-3736-4542-B5E7-E1D33C448499.png',
+    image: photos[2],
     title: 'MacBook Air M2 Chipset Repair',
     category: 'macbook',
     categoryLabel: 'MacBook Logic Board',
@@ -54,7 +58,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-green-line',
-    image: '/3B0174DD-817D-4946-A66F-B9FC21DAC30F.png',
+    image: photos[3],
     title: 'iPhone 13 Pro Green Line Screen Calibration',
     category: 'iphone',
     categoryLabel: 'Display Calibration',
@@ -66,7 +70,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-glass-smashed',
-    image: '/2BE84E7B-E075-41D4-923E-897BA047B363.png',
+    image: photos[4],
     title: 'iPhone 15 Pro Smashed Chassis Rebuilt',
     category: 'iphone',
     categoryLabel: 'Chassis & Back Glass',
@@ -78,7 +82,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-ic-soldering',
-    image: '/6D5ED1FD-3D99-44B9-8349-A9BF3B444CD7.png',
+    image: photos[5],
     title: 'iPhone PMIC Power Controller Reflow',
     category: 'iphone',
     categoryLabel: 'Power & Charging IC',
@@ -90,7 +94,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-display-truetone',
-    image: '/B6322703-6B3A-4C45-8598-D1D8B659C8DB.png',
+    image: photos[6],
     title: 'iPhone 15 Display Serialization Restore',
     category: 'iphone',
     categoryLabel: 'OLED Display Swap',
@@ -102,7 +106,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-faceid-depth',
-    image: '/EB5FA025-3FFA-42E9-AB09-136FE427D1FD.png',
+    image: photos[7],
     title: 'FaceID TrueDepth Sensor Reconstruction',
     category: 'iphone',
     categoryLabel: 'FaceID & Diagnostics',
@@ -114,7 +118,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-desk-kora',
-    image: '/photos/2.png',
+    image: photos[1],
     title: 'Koramangala Alpha Core Workstation',
     category: 'workshop',
     categoryLabel: 'Diagnostic Lab',
@@ -126,7 +130,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-desk-hbr',
-    image: '/3.jpeg',
+    image: photos[2],
     title: 'HBR Layout Gamma Micro-soldering Rig',
     category: 'workshop',
     categoryLabel: 'Diagnostic Lab',
@@ -138,7 +142,7 @@ const REPAIR_GALLERY_DATA: RepairJob[] = [
   },
   {
     id: 'job-desk-marath',
-    image: '/5.jpeg',
+    image: photos[3],
     title: 'Marathahalli Beta Heavy Calibration Desk',
     category: 'workshop',
     categoryLabel: 'Diagnostic Lab',
