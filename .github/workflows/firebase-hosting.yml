@@ -29,9 +29,14 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: 'fixerbaba-6fdcb'
+      - name: Prepare Firebase credentials
+        run: |
+          mkdir -p ${{ runner.temp }}/firebase
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > ${{ runner.temp }}/firebase/key.json
+          export GOOGLE_APPLICATION_CREDENTIALS=${{ runner.temp }}/firebase/key.json
+
+      - name: Deploy to Firebase Hosting (production)
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase/key.json
+        run: |
+          npx firebase-tools@latest deploy --project fixerbaba-6fdcb --only hosting --non-interactive
