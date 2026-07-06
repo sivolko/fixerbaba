@@ -328,19 +328,17 @@ export const LiveRepairBench: React.FC = () => {
                 <div className="text-[11px] font-semibold text-bento-sub">
                   Need a similar high-precision repair?
                 </div>
-                <a
-                  href={
-                    selectedJob.desk === 'Bengaluru Central'
-                      ? AREA_WHATSAPP_LINKS['Koramangala'] // fallback to Koramangala
-                      : AREA_WHATSAPP_LINKS[selectedJob.desk]
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => {
+                    const base = selectedJob.desk === 'Bengaluru Central' ? AREA_WHATSAPP_LINKS['Koramangala'] : AREA_WHATSAPP_LINKS[selectedJob.desk];
+                    const url = `${base}?text=${encodeURIComponent(`Hi FixerBaba, I would like a similar repair shown in ${selectedJob.desk}.`)}`;
+                    window.open(url, '_blank', 'noopener');
+                  }}
                   className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-neutral-900 px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <MessageSquare className="w-4 h-4 fill-current" />
-                  <span>Connect to Desk</span>
-                </a>
+                  <span>WhatsApp booking</span>
+                </button>
               </div>
 
             </div>

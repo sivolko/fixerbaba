@@ -186,7 +186,7 @@ export default function IndustrialHero({
               className="bg-emerald-500 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white px-6 py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all hover:scale-[1.03] active:scale-[0.97] inline-flex items-center gap-2 shadow-md cursor-pointer"
             >
               <Sparkles className="w-4 h-4 fill-current text-amber-300" />
-              <span>Book Appointment (₹0 visit)</span>
+              <span>WhatsApp booking</span>
             </button>
             <div className="relative bg-white/85 hover:bg-white border border-neutral-200/90 text-neutral-800 px-6 py-3 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all hover:scale-[1.03] active:scale-[0.97] inline-flex items-center gap-2 shadow-xs cursor-pointer select-none">
               <MapPin className="w-4 h-4 text-orange-600 shrink-0" />
