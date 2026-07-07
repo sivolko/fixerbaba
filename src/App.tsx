@@ -359,25 +359,15 @@ export default function App() {
                 ))}
               </select>
             </div>
-            <div className="hidden md:flex items-center gap-2 rounded-full border border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-900 px-2 py-1.5">
-              <select
-                value={isDarkMode ? 'dark' : 'light'}
-                onChange={(e) => setIsDarkMode(e.target.value === 'dark')}
-                aria-label="Choose theme"
-                className="bg-transparent text-sm font-semibold text-slate-900 dark:text-neutral-100 outline-none cursor-pointer"
-              >
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-              </select>
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
-              >
-                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
-            </div>
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="hidden md:inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-900 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-neutral-300 hover:bg-slate-200 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+            >
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              <span>{isDarkMode ? 'Light' : 'Dark'}</span>
+            </button>
             <button
               onClick={() => openWhatsAppBooking()}
               className="inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-white px-4 py-2 text-sm font-semibold text-white dark:text-slate-950 shadow-lg transition hover:bg-slate-800 dark:hover:bg-neutral-200"
@@ -408,21 +398,13 @@ export default function App() {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <select
-            value={isDarkMode ? 'dark' : 'light'}
-            onChange={(e) => setIsDarkMode(e.target.value === 'dark')}
-            aria-label="Choose theme"
-            className="text-[10px] font-bold text-slate-950 dark:text-neutral-100 bg-transparent focus:outline-none cursor-pointer"
-          >
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-          </select>
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
             aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="inline-flex items-center justify-center w-7 h-7 rounded-full border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-slate-700 dark:text-amber-300"
+            className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-wide text-slate-700 dark:text-neutral-300"
           >
             {isDarkMode ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+            <span>{isDarkMode ? 'Light' : 'Dark'}</span>
           </button>
           <button
             onClick={() => setIsWhatsFormOpen(true)}
