@@ -205,13 +205,7 @@ export default function IndustrialHero({
   };
 
   return (
-    <div className="relative w-full overflow-hidden bg-radial from-[#1e1c2e] via-[#0b0a11] to-[#050407] p-4 sm:p-6 md:p-8 lg:p-12 transition-colors duration-300">
-      {/* Ambient glow, unchanged palette */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-purple-900/15 rounded-full filter blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-blue-900/15 rounded-full filter blur-[120px] pointer-events-none" />
-
-      {/* Elevated content surface — background colour unchanged */}
-      <div className="sf-font relative w-full max-w-7xl mx-auto bg-[#faf9f6] text-neutral-900 rounded-[32px] sm:rounded-[48px] shadow-2xl border border-white/10 overflow-hidden flex flex-col pt-10 pb-12 px-6 sm:px-10 lg:px-14">
+    <section className="sf-font relative w-full max-w-7xl mx-auto flex flex-col pt-10 pb-16 px-6 sm:px-10 lg:px-14 text-neutral-900">
 
         {/* Hero copy */}
         <motion.div
@@ -355,9 +349,9 @@ export default function IndustrialHero({
             })}
           </div>
 
-          {/* Edge fades matching the surface colour, not a new background */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-14 sm:w-20 bg-gradient-to-r from-[#faf9f6] to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-14 sm:w-20 bg-gradient-to-l from-[#faf9f6] to-transparent z-10" />
+          {/* Edge fades matching the page background, not a new colour */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-14 sm:w-20 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-14 sm:w-20 bg-gradient-to-l from-white to-transparent z-10" />
 
           {/* Floating nav controls */}
           <button
@@ -412,7 +406,6 @@ export default function IndustrialHero({
             </div>
           ))}
         </motion.div>
-      </div>
 
       <style>{`
         .sf-font {
@@ -422,6 +415,6 @@ export default function IndustrialHero({
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
-    </div>
+    </section>
   );
 }
