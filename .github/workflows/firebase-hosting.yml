@@ -42,25 +42,41 @@ jobs:
           mkdir -p "$RUNNER_TEMP/firebase"
           KEYFILE="$RUNNER_TEMP/firebase/key.json"
 
-          if [ -n "$FIREBASE_SERVICE_ACCOUNT" ]; then
-            printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$KEYFILE"
-          else
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
             echo "ERROR: FIREBASE_SERVICE_ACCOUNT secret is empty" >&2
             exit 1
           fi
 
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$KEYFILE"
+
+          if [ ! -s "$KEYFILE" ]; then
+            echo "ERROR: wrote empty keyfile" >&2
+            exit 1
+          fi
+
           if ! python - <<'PY' "$KEYFILE"
+          import base64
           import json
           import pathlib
           import sys
 
           path = pathlib.Path(sys.argv[1])
-          raw = path.read_text()
+          raw = path.read_text().strip()
+
+          if not raw:
+              raise SystemExit("empty service account content")
+
           try:
               payload = json.loads(raw)
-          except json.JSONDecodeError:
-              raw = raw.replace('\\n', '\n')
-              payload = json.loads(raw)
+          except Exception:
+              try:
+                  decoded = base64.b64decode(raw).decode()
+                  payload = json.loads(decoded)
+              except Exception:
+                  try:
+                      payload = json.loads(raw.replace('\\n', '\n'))
+                  except Exception as e:
+                      raise SystemExit(f"could not parse service account: {e}")
 
           if not payload.get('private_key'):
               raise SystemExit('service account key is missing private_key')
