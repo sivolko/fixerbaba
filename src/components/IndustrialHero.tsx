@@ -12,7 +12,7 @@ import {
   MapPin,
   ChevronDown
 } from 'lucide-react';
-import { BANGALORE_AREAS } from '../data';
+import { BANGALORE_AREAS, AREA_WHATSAPP_LINKS } from '../data';
 
 interface IndustrialHeroProps {
   onBookClick: () => void;
@@ -204,6 +204,12 @@ export default function IndustrialHero({
     if (e.key === 'ArrowLeft') { e.preventDefault(); handleScroll('left'); }
   };
 
+  // Direct WhatsApp deep-link for the currently selected service area —
+  // updates automatically whenever the location dropdown changes.
+  const whatsappHref = `${AREA_WHATSAPP_LINKS[selectedArea] || 'https://wa.me/+919535377862'}?text=${encodeURIComponent(
+    `Hi FixerBaba, I would like to book a repair in ${selectedArea}.`
+  )}`;
+
   return (
     <section className="sf-font relative w-full max-w-7xl mx-auto flex flex-col pt-10 pb-16 px-6 sm:px-10 lg:px-14 text-neutral-900">
 
@@ -228,13 +234,15 @@ export default function IndustrialHero({
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <button
-              onClick={onBookClick}
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-full text-[13px] font-semibold tracking-tight transition-all hover:scale-[1.02] active:scale-[0.97] inline-flex items-center gap-2 shadow-[0_8px_20px_-6px_rgba(16,185,129,0.55)] cursor-pointer"
             >
               <Sparkles className="w-4 h-4 fill-current text-amber-200" />
               <span>WhatsApp booking</span>
-            </button>
+            </a>
 
             <div className="relative bg-white hover:bg-neutral-50 border border-neutral-200 text-neutral-800 px-6 py-3 rounded-full text-[13px] font-semibold tracking-tight transition-all inline-flex items-center gap-2 shadow-sm cursor-pointer select-none">
               <MapPin className="w-4 h-4 text-neutral-400 shrink-0" />
