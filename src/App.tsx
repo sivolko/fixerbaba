@@ -1338,7 +1338,7 @@ export default function App() {
                   <motion.div
                     animate={{
                       x: tiltCard1.x,
-                      y: tilt Card1.y,
+                      y: tiltCard1.y,
                       rotateX: tiltCard1.rotateX,
                       rotateY: tiltCard1.rotateY,
                       scale: tiltCard1.active ? 1.025 : 1,

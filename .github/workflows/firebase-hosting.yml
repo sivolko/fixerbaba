@@ -2,7 +2,7 @@ name: Deploy to Firebase Hosting
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build_and_deploy:
@@ -18,43 +18,68 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
 
       - name: Install dependencies
         run: |
-          # try a clean install from lockfile, fall back to install if needed
-          npm ci || npm install
-          # rebuild native modules if any exist
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
           npm rebuild || true
+
+      - name: Validate build
+        run: npm run lint
 
       - name: Build
         run: npm run build
 
       - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-          mkdir -p "${{ runner.temp }}/firebase"
-          KEYFILE="${{ runner.temp }}/firebase/key.json"
-          # try writing raw secret
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > "$KEYFILE"
-          # if it doesn't look like JSON with a private_key, try base64 decode
-          if ! grep -q '"private_key"' "$KEYFILE"; then
-            echo "Secret doesn't contain private_key, attempting base64 decode"
-            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" | base64 --decode > "$KEYFILE" 2>/dev/null || true
-          fi
-          # if still not valid, try interpreting escaped newlines
-          if ! grep -q '"private_key"' "$KEYFILE"; then
-            echo "Attempting to convert escaped newlines"
-            printf '%b' "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > "$KEYFILE" || true
-          fi
-          # final sanity check
-          if ! grep -q '"private_key"' "$KEYFILE"; then
-            echo "ERROR: service account key does not contain private_key" >&2
+          mkdir -p "$RUNNER_TEMP/firebase"
+          KEYFILE="$RUNNER_TEMP/firebase/key.json"
+
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$KEYFILE"
+          else
+            echo "ERROR: FIREBASE_SERVICE_ACCOUNT secret is empty" >&2
             exit 1
           fi
+
+          if ! python - <<'PY' "$KEYFILE"
+          import json
+          import pathlib
+          import sys
+
+          path = pathlib.Path(sys.argv[1])
+          raw = path.read_text()
+          try:
+              payload = json.loads(raw)
+          except json.JSONDecodeError:
+              raw = raw.replace('\\n', '\n')
+              payload = json.loads(raw)
+
+          if not payload.get('private_key'):
+              raise SystemExit('service account key is missing private_key')
+
+          path.write_text(json.dumps(payload, indent=2))
+          PY
+          then
+            echo "ERROR: could not parse Firebase service account credentials" >&2
+            exit 1
+          fi
+
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$KEYFILE" >> "$GITHUB_ENV"
           echo "Wrote service account key to $KEYFILE"
-          export GOOGLE_APPLICATION_CREDENTIALS="$KEYFILE"
+
+      - name: Install Firebase CLI
+        run: npm install --no-save firebase-tools@latest
 
       - name: Deploy to Firebase Hosting (production)
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/firebase/key.json
         run: |
-          npx firebase-tools@latest deploy --project fixerbaba-6fdcb --only hosting --non-interactive
+          npx firebase-tools deploy --project fixerbaba-6fdcb --only hosting --non-interactive
