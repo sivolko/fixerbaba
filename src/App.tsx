@@ -329,29 +329,29 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-slate-900 selection:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-neutral-950 text-slate-900 dark:text-neutral-100 selection:bg-slate-900 selection:text-white transition-colors duration-300">
       {/* 1. Global Navigation Bar header */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-slate-200 px-4 py-4 sm:px-8">
+      <header className="sticky top-0 z-40 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl border-b border-slate-200 dark:border-neutral-800 px-4 py-4 sm:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <a href="/" className="flex items-center">
               <BrandLogo size="sm" />
             </a>
-            <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700">
-              <a href="#" className="hover:text-slate-900 transition-colors">Home</a>
-              <a href="#services-grid" className="hover:text-slate-900 transition-colors">Services</a>
-              <a href="#live-repair-bench-container" className="hover:text-slate-900 transition-colors">Live Work</a>
-              <a href="#reviews-section" className="hover:text-slate-900 transition-colors">Reviews</a>
+            <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700 dark:text-neutral-300">
+              <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">Home</a>
+              <a href="#services-grid" className="hover:text-slate-900 dark:hover:text-white transition-colors">Services</a>
+              <a href="#live-repair-bench-container" className="hover:text-slate-900 dark:hover:text-white transition-colors">Live Work</a>
+              <a href="#reviews-section" className="hover:text-slate-900 dark:hover:text-white transition-colors">Reviews</a>
             </nav>
           </div>
 
           <div className="flex flex-wrap items-center gap-3"> 
-            <div className="hidden md:flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-4 py-2 text-sm text-slate-700">
-              <MapPin className="w-4 h-4 text-slate-500" />
+            <div className="hidden md:flex items-center gap-2 rounded-full border border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-900 px-4 py-2 text-sm text-slate-700 dark:text-neutral-300">
+              <MapPin className="w-4 h-4 text-slate-500 dark:text-neutral-400" />
               <select
                 value={selectedArea}
                 onChange={(e) => setSelectedArea(e.target.value)}
-                className="bg-transparent text-sm font-semibold text-slate-900 outline-none"
+                className="bg-transparent text-sm font-semibold text-slate-900 dark:text-neutral-100 outline-none"
               >
                 {BANGALORE_AREAS.map((area) => (
                   <option key={area} value={area}>{area}</option>
@@ -359,10 +359,18 @@ export default function App() {
               </select>
             </div>
             <button
-              onClick={() => openWhatsAppBooking()}
-              className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-800"
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-900 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 text-emerald-400" />
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={() => openWhatsAppBooking()}
+              className="inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-white px-4 py-2 text-sm font-semibold text-white dark:text-slate-950 shadow-lg transition hover:bg-slate-800 dark:hover:bg-neutral-200"
+            >
+              <Sparkles className="w-4 h-4 text-emerald-400 dark:text-emerald-600" />
               WhatsApp booking
             </button>
           </div>
@@ -370,14 +378,14 @@ export default function App() {
       </header>
 
       {/* Mobile Location Selector (Strictly below navbar on small screens) */}
-      <div className="sm:hidden px-4 py-2 border-b border-slate-200 bg-slate-50 flex items-center justify-between gap-2">
+      <div className="sm:hidden px-4 py-2 border-b border-slate-200 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-950 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <MapPin className="w-3.5 h-3.5 text-orange-600 shrink-0" />
-          <span className="text-xs text-slate-500 font-medium">Serving:</span>
+          <span className="text-xs text-slate-500 dark:text-neutral-400 font-medium">Serving:</span>
           <select
             value={selectedArea}
             onChange={(e) => setSelectedArea(e.target.value)}
-            className="text-xs font-bold text-slate-950 bg-transparent focus:outline-none cursor-pointer"
+            className="text-xs font-bold text-slate-950 dark:text-neutral-100 bg-transparent focus:outline-none cursor-pointer"
           >
             {BANGALORE_AREAS.map((area) => (
               <option key={area} value={area}>
@@ -386,16 +394,25 @@ export default function App() {
             ))}
           </select>
         </div>
-        
-        <button
-          onClick={() => setIsWhatsFormOpen(true)}
-          className="inline-flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wide shadow-lg active:scale-95 transition-all"
-        >
-          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.977 14.053.951 11.43.951c-5.44 0-9.866 4.369-9.87 9.802-.001 1.716.463 3.39 1.34 4.877l-.994 3.634 3.751-.984zm11.083-7.5c-.302-.15-1.786-.881-2.053-.978-.266-.097-.461-.146-.655.15-.194.297-.749.978-.919 1.173-.17.195-.34.219-.642.069-.302-.15-1.272-.469-2.423-1.496-.895-.798-1.5-1.783-1.676-2.082-.175-.3-.019-.462.131-.611.135-.134.302-.35.454-.525.151-.175.202-.299.302-.5.101-.2.051-.375-.025-.526-.076-.15-.655-1.579-.897-2.161-.236-.569-.475-.492-.655-.501-.17-.008-.364-.01-.559-.01-.194 0-.51.073-.777.364-.266.292-1.02 1.025-1.02 2.501 0 1.475 1.07 2.9 1.215 3.1.146.199 2.105 3.214 5.099 4.507.712.308 1.27.493 1.704.631.715.227 1.365.195 1.88.118.574-.085 1.786-.73 2.039-1.436.252-.706.252-1.312.176-1.436-.076-.124-.267-.197-.569-.347z"/>
-          </svg>
-          <span>WhatsApp booking</span>
-        </button>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            className="inline-flex items-center justify-center w-7 h-7 rounded-full border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-slate-700 dark:text-amber-300"
+          >
+            {isDarkMode ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+          </button>
+          <button
+            onClick={() => setIsWhatsFormOpen(true)}
+            className="inline-flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wide shadow-lg active:scale-95 transition-all"
+          >
+            <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.977 14.053.951 11.43.951c-5.44 0-9.866 4.369-9.87 9.802-.001 1.716.463 3.39 1.34 4.877l-.994 3.634 3.751-.984zm11.083-7.5c-.302-.15-1.786-.881-2.053-.978-.266-.097-.461-.146-.655.15-.194.297-.749.978-.919 1.173-.17.195-.34.219-.642.069-.302-.15-1.272-.469-2.423-1.496-.895-.798-1.5-1.783-1.676-2.082-.175-.3-.019-.462.131-.611.135-.134.302-.35.454-.525.151-.175.202-.299.302-.5.101-.2.051-.375-.025-.526-.076-.15-.655-1.579-.897-2.161-.236-.569-.475-.492-.655-.501-.17-.008-.364-.01-.559-.01-.194 0-.51.073-.777.364-.266.292-1.02 1.025-1.02 2.501 0 1.475 1.07 2.9 1.215 3.1.146.199 2.105 3.214 5.099 4.507.712.308 1.27.493 1.704.631.715.227 1.365.195 1.88.118.574-.085 1.786-.73 2.039-1.436.252-.706.252-1.312.176-1.436-.076-.124-.267-.197-.569-.347z"/>
+            </svg>
+            <span>WhatsApp booking</span>
+          </button>
+        </div>
       </div>
 
       <main className="flex-1 pb-16">
@@ -1321,7 +1338,7 @@ export default function App() {
                   <motion.div
                     animate={{
                       x: tiltCard1.x,
-                      y: tiltCard1.y,
+                      y: tilt Card1.y,
                       rotateX: tiltCard1.rotateX,
                       rotateY: tiltCard1.rotateY,
                       scale: tiltCard1.active ? 1.025 : 1,
