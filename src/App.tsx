@@ -137,7 +137,8 @@ export default function App() {
   
   // Theme management (Light vs. OLED Dark)
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    return localStorage.getItem('theme') === 'dark';
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('theme') === 'dark';
   });
 
   // States to support magnetic tilt hover animations on the feature cards
@@ -358,14 +359,25 @@ export default function App() {
                 ))}
               </select>
             </div>
-            <button
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-              title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-900 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
-            >
-              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
+            <div className="hidden md:flex items-center gap-2 rounded-full border border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-900 px-2 py-1.5">
+              <select
+                value={isDarkMode ? 'dark' : 'light'}
+                onChange={(e) => setIsDarkMode(e.target.value === 'dark')}
+                aria-label="Choose theme"
+                className="bg-transparent text-sm font-semibold text-slate-900 dark:text-neutral-100 outline-none cursor-pointer"
+              >
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+              <button
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+              >
+                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
+            </div>
             <button
               onClick={() => openWhatsAppBooking()}
               className="inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-white px-4 py-2 text-sm font-semibold text-white dark:text-slate-950 shadow-lg transition hover:bg-slate-800 dark:hover:bg-neutral-200"
@@ -396,6 +408,15 @@ export default function App() {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
+          <select
+            value={isDarkMode ? 'dark' : 'light'}
+            onChange={(e) => setIsDarkMode(e.target.value === 'dark')}
+            aria-label="Choose theme"
+            className="text-[10px] font-bold text-slate-950 dark:text-neutral-100 bg-transparent focus:outline-none cursor-pointer"
+          >
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
             aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
