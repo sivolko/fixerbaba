@@ -2,23 +2,23 @@
 @import "tailwindcss";
 
 :root {
-  --bento-bg: #f5f5f7;
-  --bento-text: #1d1d1f;
-  --bento-sub: #86868b;
-  --bento-blue: #0071e3;
-  --bento-blue-hover: #0077ed;
-  --bento-card: #ffffff;
-  --bento-border: #e8e8ed;
+  --page-bg: #f8fafc;
+  --page-text: #0f172a;
+  --page-sub: #64748b;
+  --page-primary: #1d4ed8;
+  --page-primary-hover: #2563eb;
+  --page-card: #ffffff;
+  --page-border: #e2e8f0;
 }
 
 .dark {
-  --bento-bg: #000000;
-  --bento-text: #f5f5f7;
-  --bento-sub: #a1a1a6;
-  --bento-blue: #2997ff;
-  --bento-blue-hover: #51a8ff;
-  --bento-card: #161617;
-  --bento-border: #2d2d2f;
+  --page-bg: #0f172a;
+  --page-text: #f8fafc;
+  --page-sub: #94a3b8;
+  --page-primary: #60a5fa;
+  --page-primary-hover: #38bdf8;
+  --page-card: #111827;
+  --page-border: #334155;
 }
 
 @theme {
@@ -26,13 +26,13 @@
   --font-display: "Space Grotesk", sans-serif;
   --font-serif: "Playfair Display", serif;
   
-  --color-bento-bg: var(--bento-bg);
-  --color-bento-text: var(--bento-text);
-  --color-bento-sub: var(--bento-sub);
-  --color-bento-blue: var(--bento-blue);
-  --color-bento-blue-hover: var(--bento-blue-hover);
-  --color-bento-card: var(--bento-card);
-  --color-bento-border: var(--bento-border);
+  --color-bg: var(--page-bg);
+  --color-text: var(--page-text);
+  --color-sub: var(--page-sub);
+  --color-primary: var(--page-primary);
+  --color-primary-hover: var(--page-primary-hover);
+  --color-card: var(--page-card);
+  --color-border: var(--page-border);
 }
 
 @layer utilities {
@@ -55,8 +55,8 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bento-bg);
-  color: var(--bento-text);
+  background-color: var(--page-bg);
+  color: var(--page-text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
