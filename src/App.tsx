@@ -557,7 +557,7 @@ export default function App() {
               {/* Box 6 (Safety Warranty - Spotlight Vertical, tall layout span 2 rows & 2 columns) */}
               <motion.div 
                 variants={heroCardVariants}
-                className="bg-neutral-900 dark:bg-[#161617] border border-neutral-800 dark:border-slate-200 text-white rounded-[2rem] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-300 md:col-span-2 md:row-span-2"
+                className="w-full bg-neutral-900 dark:bg-[#161617] border border-neutral-800 dark:border-slate-200 text-white rounded-[2rem] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-all duration-300 md:col-span-2 md:row-span-2"
               >
                 <div className="absolute top-10 right-10 opacity-10">
                   <Wrench className="w-40 h-40 stroke-[1.5]" />
@@ -580,7 +580,7 @@ export default function App() {
               {/* Box 7 (Loyalty Club Member - Spotlight Horizontal Narrow, col-span-1) */}
               <motion.div 
                 variants={heroCardVariants}
-                className="md:col-span-1 bg-gradient-to-br from-[#7c3aed] to-[#4f46e5] rounded-[2rem] p-6 text-white flex flex-col justify-between overflow-hidden relative group shadow-lg hover:shadow-md transition-all duration-300"
+                className="w-full md:col-span-1 bg-gradient-to-br from-[#7c3aed] to-[#4f46e5] rounded-[2rem] p-6 text-white flex flex-col justify-between overflow-hidden relative group shadow-lg hover:shadow-md transition-all duration-300"
               >
                 <div className="z-10">
                   <span className="bg-white/20 text-[9px] uppercase font-black tracking-widest px-2.5 py-1 rounded-md">
@@ -610,7 +610,7 @@ export default function App() {
               <motion.button
                 variants={heroCardVariants}
                 onClick={() => setIsAiOpen(true)}
-                className="bg-white/95 hover:bg-slate-50/80 rounded-[2rem] p-6 flex items-center gap-4 transition-all text-left cursor-pointer group border border-slate-200 shadow-xl"
+                className="w-full bg-white/95 hover:bg-slate-50/80 rounded-[2rem] p-6 flex items-center gap-4 transition-all text-left cursor-pointer group border border-slate-200 shadow-xl"
               >
                 <div className="w-11 h-11 bg-slate-50 rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Sparkles className="w-5 h-5 text-slate-950 fill-blue-50/10" />
