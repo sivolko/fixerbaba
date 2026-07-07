@@ -399,56 +399,22 @@ export default function App() {
       </div>
 
       <main className="flex-1 pb-16">
-        <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 pb-20">
+        <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100">
           <div className="absolute inset-x-0 top-0 h-80 bg-slate-900/5 blur-3xl" />
-          <div className="relative max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-8">
-                <p className="inline-flex rounded-full bg-slate-900/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-slate-600">
-                  FixerBaba for Apple-style care
-                </p>
-                <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-950">
-                  Premium device repair, designed like Apple.
-                </h1>
-                <p className="max-w-2xl text-base leading-8 text-slate-600">
-                  Same-day verified repair service for iPhone, MacBook, iPad and Apple Watch, conveniently booked on WhatsApp with clear pricing and expert technicians.
-                </p>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 gap-3">
-                  <button
-                    onClick={() => openWhatsAppBooking()}
-                    className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-950/10 transition hover:bg-slate-800"
-                  >
-                    WhatsApp booking
-                  </button>
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById('services-grid');
-                      if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg transition hover:border-slate-300"
-                  >
-                    Explore services
-                  </button>
-                </div>
-              </div>
-              <div className="rounded-[2rem] border border-slate-200 bg-white shadow-[0_40px_120px_-40px_rgba(15,23,42,0.2)] overflow-hidden">
-                <IndustrialHero
-                  selectedArea={selectedArea}
-                  onAreaChange={setSelectedArea}
-                  onBookClick={() => setIsWhatsFormOpen(true)}
-                  onExploreClick={() => {
-                    const el = document.getElementById('services-grid');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  onSelectSearch={(query) => {
-                    setSearchQuery(query);
-                    const el = document.getElementById('services-grid');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                />
-              </div>
-            </div>
-          </div>
+          <IndustrialHero
+            selectedArea={selectedArea}
+            onAreaChange={setSelectedArea}
+            onBookClick={() => setIsWhatsFormOpen(true)}
+            onExploreClick={() => {
+              const el = document.getElementById('services-grid');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            onSelectSearch={(query) => {
+              setSearchQuery(query);
+              const el = document.getElementById('services-grid');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+          />
         </section>
         
 {/* 2. Spotlight dashboard grid area */}
